@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://lnoco0ihcb03"]
+
+[ext_resource type="Script" path="res://CharacterBody3D.gd" id="1_nv80h"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wwilk"]
+sky_top_color = Color(0.494118, 0.2, 1, 1)
+sky_horizon_color = Color(0.626471, 0.604902, 0.75, 1)
+ground_bottom_color = Color(0.0117647, 0.219608, 0, 1)
+ground_horizon_color = Color(0.626471, 0.604902, 0.75, 1)
+
+[sub_resource type="Sky" id="Sky_r2low"]
+sky_material = SubResource("ProceduralSkyMaterial_wwilk")
+
+[sub_resource type="Environment" id="Environment_wjo32"]
+background_mode = 2
+sky = SubResource("Sky_r2low")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fa1ul"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nhn56"]
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(0.999826, 0, 0.018639, 0, 1, 0, -0.018639, 0, 0.999826, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wjo32")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 3.3602, 0)
+light_color = Color(0.27451, 0.729412, 0.811765, 1)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1.01148, 0, 0, 0, 1.01148, 0, 0, 0, 1.01148, 0.323742, 0.523976, 1.04081)
+use_collision = true
+size = Vector3(1.64014, 1, 2.80481)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.525724, -0.362305, 1.53526, -0.265137)
+use_collision = true
+size = Vector3(0.275391, 1, 0.469727)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1.12524, 0, 0, 0, 1.12524, 0, 0, 0, 0.591566, 0.992326, 1.31365, -0.177007)
+use_collision = true
+size = Vector3(0.287903, 1, 0.674988)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(0.224532, 0, 0, 0, 1.00914, 0, 0, 0, 0.391286, 0.31509, 1.91711, -0.25054)
+use_collision = true
+size = Vector3(7.3667, 0.20105, 1.35495)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.290381, 1.33737, 1.49695)
+script = ExtResource("1_nv80h")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_fa1ul")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.107875, 0.140139, -0.0649185)
+shape = SubResource("CapsuleShape3D_nhn56")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
